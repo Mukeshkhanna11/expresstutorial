@@ -1,14 +1,9 @@
 const http = require("http");
 const server = http.createServer((req, res) => {
-  if (req.url === "/") {
-    res.write("hello world");
-    res.end();
-  } else if (req.url === "/about") {
-    res.write("about page");
-    res.end();
-  } else {
-    res.write("there is no such page");
-    res.end();
-  }
+  //console.log(req.method);
+  console.log(req.url);
+  res.writeHead(200, { "content-type": "text/html" });
+  res.write("<h1>home page</h1>");
+  res.end();
 });
 server.listen(5000);
