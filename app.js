@@ -1,9 +1,14 @@
-const http = require("http");
-const server = http.createServer((req, res) => {
-  console.log(req.method);
-  console.log(req.url);
-  res.writeHead(200, { "content-type": "text/html" });
-  res.write("<h1>home page</h1>");
-  res.end();
+const express = require("express");
+const app = express();
+app.get("/", (req, res) => {
+  res.send("home page");
 });
-server.listen(5000);
+app.get("/about", (req, res) => {
+  res.status(200).send("about page");
+});
+app.all("*", (req, res) => {
+  res.status(404).end("page not found");
+});
+app.listen(5000, () => {
+  console.log("this is the port 5000....");
+});
