@@ -1,18 +1,15 @@
 const express = require("express");
 const app = express();
-const logger = (req, res, next) => {
-  const method = req.method;
-  const url = req.url;
-  const time = new Date().getFullYear();
-  console.log(method, url, time);
-  next();
-};
-
-app.get("/", logger, (req, res) => {
+const logger = require("./logger");
+app.use("/api", logger);
+app.get("/", (req, res) => {
   res.send("home page");
 });
-app.get("/about", logger, (req, res) => {
+app.get("/about", (req, res) => {
   res.send("about page");
+});
+app.get("/api/products", (req, res) => {
+  res.send("products page");
 });
 
 app.listen(5000, () => {
